@@ -1,8 +1,8 @@
 package com.algorithmica.lists;
 
-public class AbstractList {
+public abstract class AbstractList<E> {
 
-	protected int size;
+	protected int size = 0;
 	
 	public int size(){
 		return size;

@@ -5,7 +5,7 @@ public interface iList<E> {
 	public boolean add(E e);
 	
 	public boolean add(E[] array);
-	
+	 
 	public E get(int index);
 	
 	public E remove(int index);
@@ -15,5 +15,9 @@ public interface iList<E> {
 	public String display();
 	
 	public boolean contains(E value);
+	
+	public int size();
+	
+	public iList<E> reverse();
 	
 }

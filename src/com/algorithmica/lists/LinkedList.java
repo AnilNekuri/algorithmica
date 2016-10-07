@@ -1,29 +1,70 @@
 package com.algorithmica.lists;
 
-public class LinkedList<E> implements iList<E> {
+public class LinkedList<E> extends AbstractList<E> implements iList<E> {
+
+	class ListNode<E>{
+		E data;
+		ListNode<E> next;
+		@SuppressWarnings("unchecked")
+		public ListNode() {
+			data = (E)new Object();
+			next = null;
+		}		
+	}
+	
+	public ListNode<E> head;
+	public ListNode<E> tail;
+	public LinkedList() {
+		head = tail = null;
+	}
 
 	@Override
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		ListNode<E> current = new ListNode<E>();
+		current.data = e;
+		if(head == null){
+			head = current;			
+		}else{
+			tail.next = current;			
+		}
+		tail = current;
+		++size;
+		return true;
 	}
 
 	@Override
 	public boolean add(E[] array) {
-		// TODO Auto-generated method stub
-		return false;
+		for (int i = 0; i < array.length; i++) {
+			add(array[i]);
+		}
+		return true;
 	}
 
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		ListNode<E> node = head;
+		
+		if(index < size){
+			for(int i = 0;i < index;i++){
+				node = node.next;
+			}	
+		}		
+		return node.data;
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		ListNode<E> node = head;
+		ListNode<E> temp = null;
+		if(index < size){
+			for(int i = 0;i < index-1;i++){
+				node = node.next;
+			}
+			temp = node.next;
+			node.next = node.next.next;
+			--size;
+		}
+		return temp.data;
 	}
 
 	@Override
@@ -34,14 +75,38 @@ public class LinkedList<E> implements iList<E> {
 
 	@Override
 	public String display() {
-		// TODO Auto-generated method stub
-		return null;
+		String values = "";
+		for(ListNode<E> node = head; node !=null; node = node.next ){
+			values += node.data+" ";
+		}
+		System.out.println(values);
+		return values;
 	}
 
 	@Override
 	public boolean contains(E value) {
-		// TODO Auto-generated method stub
+		for(ListNode<E> node = head; node !=null; node = node.next ){
+			if(node.data.equals(value)){
+				return true;
+			}
+		}
 		return false;
+	}
+
+	@Override
+	public iList<E> reverse() {
+		
+		ListNode<E> prev = null;
+		ListNode<E> current = head; 
+		tail = head;
+		while(current != null){
+			ListNode<E> temp = current.next;
+			current.next = prev;
+			prev = current;
+			current = temp;
+		}
+		head = prev;		
+		return this;
 	}
 
 }

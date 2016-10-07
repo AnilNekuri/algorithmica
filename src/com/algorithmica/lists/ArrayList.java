@@ -1,55 +1,106 @@
 package com.algorithmica.lists;
 
-public class ArrayList<E> implements iList<E> {
-	
+public class ArrayList<E> extends AbstractList<E> implements iList<E> {
+
 	private E[] array;
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList() {
-		// TODO Auto-generated constructor stub
-		array = (E[])new Object[10];  
+		array = (E[])new Object[10];
 	}
 
 	@Override
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		if(array.length == size){
+			@SuppressWarnings("unchecked")
+			E[] newarray = (E[])new Object[array.length*2];		
+			for(int i = 0; i < array.length;i++){
+				newarray[i] = array[i];				
+			}
+			array = newarray;			
+		}
+		array[size] = e;	
+		size++;
+		return true;
 	}
 
 	@Override
 	public boolean add(E[] array) {
-		// TODO Auto-generated method stub
-		return false;
+		for (E e : array) {
+			add(e);
+		}
+		return true;
 	}
 
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		E e = null;
+		if(index < size){
+			e = array[index];
+		}
+		return e;
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		E e = null;
+		if(index < size){
+			int i = index;
+			for(; i < size-1; i++){
+				array[i] = array[i+1];
+			}
+			array[i] = null;
+			--size;
+		}
+		return e;
 	}
 
 	@Override
 	public boolean remove(E value) {
-		// TODO Auto-generated method stub
+		if(value != null){
+			for(int i = 0; i < size; i++){
+				if(value.equals(array[i])){
+					remove(i);
+					return true;
+				}
+			}	
+		}		
 		return false;
 	}
 
 	@Override
 	public String display() {
-		// TODO Auto-generated method stub
-		return null;
+		String value = "";
+		for(int i = 0; i < size; i++){
+			//System.out.print(array[i]+" ");
+			value += array[i]+" ";
+		}
+		value += "\n";
+		System.out.print(value);
+		return value;
 	}
 
 	@Override
 	public boolean contains(E value) {
-		// TODO Auto-generated method stub
+		if(size > 0 && value!=null){
+			for(int i = 0; i < size; i++){
+				if(value.equals(array[i])){
+					return true;
+				}
+			}
+		}
 		return false;
+	}
+
+	@Override
+	public iList<E> reverse() {
+		int n = size/2;
+		for(int i = 0; i < n;i++){
+			E temp = array[i];
+			array[i] = array[size-i-1];
+			array[size-i-1] = temp;
+		}
+		return this;
 	}
 
 }
