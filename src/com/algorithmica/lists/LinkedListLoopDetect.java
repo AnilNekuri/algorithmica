@@ -29,8 +29,8 @@ public class LinkedListLoopDetect {
 	public boolean containsLoop(){	
 		boolean containsLoop = true;
 		if(linkedList.size > 0){
-			LinkedList<Integer>.ListNode<Integer> pointer1 = linkedList.head;
-			LinkedList<Integer>.ListNode<Integer> pointer2 = linkedList.head;
+			ListNode<Integer> pointer1 = linkedList.head;
+			ListNode<Integer> pointer2 = linkedList.head;
 			do{
 				if(pointer2.next == null || (pointer2 = pointer2.next.next) == null
 						|| (pointer1 = pointer1.next) == null){
