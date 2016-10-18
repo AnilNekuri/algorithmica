@@ -20,13 +20,28 @@ public class HashSet<E> implements ISet<E>{
 	}
 	
 	private void rehash(){
-		if(size / hstb.length > 20){
-			
+		ListNode<E>[] tmp = hstb;
+		@SuppressWarnings("unchecked")
+		ListNode<E>[] newhstb = (ListNode<E>[])new ListNode[tmp.length*2];
+		size = 0;
+		for(int i = 0; i < newhstb.length; i++){
+			newhstb[i] = new ListNode<E>();
+		}
+		hstb = newhstb;
+		for(int i = 0; i < tmp.length; i++){			
+			ListNode<E> currentNode = tmp[i].next;
+			while(currentNode !=null){
+				add(currentNode.data);
+				currentNode = currentNode.next;
+			}
 		}
 	}
 
 	@Override
-	public boolean add(E e) {		
+	public boolean add(E e) {	
+		if(size / hstb.length > 20){
+			rehash();
+		}
 		int bucket = e.hashCode() % hstb.length;
 		ListNode<E> head = hstb[bucket];
 		ListNode<E> currentNode = head.next;
