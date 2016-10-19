@@ -1,6 +1,6 @@
 package com.algorithmica.lists;
 
-public interface iList<E> {
+public interface IList<E> {
 
 	public boolean add(E e);
 	
@@ -18,6 +18,6 @@ public interface iList<E> {
 	
 	public int size();
 	
-	public iList<E> reverse();
+	public IList<E> reverse();
 	
 }

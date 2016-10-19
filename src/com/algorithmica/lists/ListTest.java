@@ -14,7 +14,7 @@ public class ListTest {
 		}
 		
 		
-		iList<Integer> list = new ArrayList<Integer>();		
+		IList<Integer> list = new ArrayList<Integer>();		
 		list.add(arr);
 		list.display();
 		list.reverse();

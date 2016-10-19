@@ -1,6 +1,6 @@
 package com.algorithmica.lists;
 
-public class LinkedList<E> extends AbstractList<E> implements iList<E> {
+public class LinkedList<E> extends AbstractList<E> implements IList<E> {
 	
 	public ListNode<E> head;
 	public ListNode<E> tail;
@@ -84,7 +84,7 @@ public class LinkedList<E> extends AbstractList<E> implements iList<E> {
 	}
 
 	@Override
-	public iList<E> reverse() {
+	public IList<E> reverse() {
 		
 		ListNode<E> prev = null;
 		ListNode<E> current = head; 

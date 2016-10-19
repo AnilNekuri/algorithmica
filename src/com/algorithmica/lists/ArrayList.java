@@ -1,6 +1,6 @@
 package com.algorithmica.lists;
 
-public class ArrayList<E> extends AbstractList<E> implements iList<E> {
+public class ArrayList<E> extends AbstractList<E> implements IList<E> {
 
 	private E[] array;
 	
@@ -93,7 +93,7 @@ public class ArrayList<E> extends AbstractList<E> implements iList<E> {
 	}
 
 	@Override
-	public iList<E> reverse() {
+	public IList<E> reverse() {
 		int n = size/2;
 		for(int i = 0; i < n;i++){
 			E temp = array[i];
