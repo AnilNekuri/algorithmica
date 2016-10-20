@@ -1,6 +1,16 @@
 package com.algorithmica.cache;
 
+import com.algorithmica.lists.DLinkedList;
+import com.algorithmica.map.HashMap;
+import com.algorithmica.map.IMap;
+
 public class LinkedHashCache<K, V> implements ICache<K, V> {
+	
+	private int size = 0;
+	private int capacity = 0;
+	
+	public IMap<K, V> map = new HashMap<K, V>();
+	public DLinkedList<V> dLinkedList = new DLinkedList<V>();
 
 	@Override
 	public void put(K key, V value) {
