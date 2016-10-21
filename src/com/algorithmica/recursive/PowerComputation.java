@@ -1,24 +1,37 @@
 package com.algorithmica.recursive;
 
+import java.math.BigInteger;
+
 public class PowerComputation {
 
-	public long power(long x,long n){
-		if(n == 1){
+	public BigInteger power(BigInteger x,BigInteger n){
+		if(n.toString().equals("1")){
 			return x;
 		}
-		long tmp = power(x, n/2);
-		if(n % 2 == 0){// % is very costly operation 
-			return tmp*tmp;
+		BigInteger tmp = power(x, n.divide(new BigInteger("2")));
+		
+		if(n.mod(new BigInteger("2")).toString().equals("0")){// % is very costly operation 
+			return tmp.multiply(tmp);
 		}else{
-			return x*tmp*tmp;
+			return x.multiply(tmp).multiply(tmp);
 		}
 	}
 	
 	public static void main(String[] args) {
 		PowerComputation pc = new PowerComputation();
-		int x = Integer.parseInt(args[0]);
-		int n = Integer.parseInt(args[1]);
-		long value = pc.power(x, n);
-		System.out.println(x+" porer "+n+" : "+value);
+		BigInteger x = new BigInteger(args[0]);
+		BigInteger n = new BigInteger(args[1]);
+		BigInteger value = pc.power(x, n);
+		System.out.println(x.toString()+" power "+n.toString()+" : "+value.toString());
+	}
+	
+	public static void main1(String[] args) {
+		BigInteger x = new BigInteger(args[0]);
+		BigInteger n = new BigInteger(args[1]);
+		BigInteger tmp = n.divide(new BigInteger("2"));
+		if(tmp.toString().equals("1")){
+			System.out.println("equal");
+		}
+		System.out.println(tmp.toString());
 	}
 }

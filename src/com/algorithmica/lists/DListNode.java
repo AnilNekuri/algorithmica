@@ -1,13 +1,15 @@
 package com.algorithmica.lists;
 
-public class DListNode<E> {
+public class DListNode<K,V> {
 
-	public E data;
-	public DListNode<E> prev;
-	public DListNode<E> next;
+	public K key;
+	public V data;
+	public DListNode<K,V> prev;
+	public DListNode<K,V> next;
 	@SuppressWarnings("unchecked")
-	public DListNode() {
-		data = (E)new Object();
+	public DListNode(K k,V v) {
+		key = k;
+		data = v;
 		prev = null;
 		next = null;
 	}		
