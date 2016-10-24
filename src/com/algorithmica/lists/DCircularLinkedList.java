@@ -1,13 +1,11 @@
 package com.algorithmica.lists;
 
-public class DLinkedList<K,E>{
+public class DCircularLinkedList<K,E>{
 
 	private int size;
 	public DListNode<K,E> head;
-	public DListNode<K,E> tail;
-	public DLinkedList() {
+	public DCircularLinkedList() {
 		 head = new DListNode<K,E>(null,null);
-		 tail = head;
 		 head.prev = head;
 		 head.next = head;
 		 size = 0;
@@ -15,10 +13,10 @@ public class DLinkedList<K,E>{
 	
 	public boolean add(K k,E e) {
 		DListNode<K,E> current = new DListNode<K,E>(k,e);
-		current.data = e;
-		tail.next = current;	
-		current.prev = tail;
-		tail = current;
+		head.prev.next = current;	
+		current.prev = head.prev;
+		current.next = head;
+		head.prev = current;
 		++size;
 		return true;
 	}
@@ -28,7 +26,7 @@ public class DLinkedList<K,E>{
 			DListNode<K,E> prev = node.prev;
 			DListNode<K,E> next = node.next;
 			prev.next = next;
-			if(next!=null)next.prev = prev;
+			next.prev = prev;
 			--size;
 		}
 		return true;
@@ -36,7 +34,7 @@ public class DLinkedList<K,E>{
 
 	public String display() {
 		String values = "";
-		for(DListNode<K,E> node = head.next; node !=null; node = node.next ){
+		for(DListNode<K,E> node = head.next; node != head; node = node.next ){
 			values += node.key+" : "+ node.data+" , ";
 		}
 		return values;

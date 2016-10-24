@@ -24,14 +24,5 @@ public class PowerComputation {
 		BigInteger value = pc.power(x, n);
 		System.out.println(x.toString()+" power "+n.toString()+" : "+value.toString());
 	}
-	
-	public static void main1(String[] args) {
-		BigInteger x = new BigInteger(args[0]);
-		BigInteger n = new BigInteger(args[1]);
-		BigInteger tmp = n.divide(new BigInteger("2"));
-		if(tmp.toString().equals("1")){
-			System.out.println("equal");
-		}
-		System.out.println(tmp.toString());
-	}
+
 }
