@@ -84,9 +84,9 @@ public class TreeSize<T> {
 		if(node == null) return;
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
-			whiteSpace += "     ";
+			whiteSpace += "   ";
 		}
-		System.out.println(whiteSpace+"|__("+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString())+")");
+		System.out.println(whiteSpace+"|__"+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString()));
 		//System.out.print(whiteSpace+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString())+"-->");
 		level = level+1;
 		if(node.left != null || node.right != null){
@@ -101,7 +101,7 @@ public class TreeSize<T> {
 	public void printNull(int level){
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
-			whiteSpace += "     ";
+			whiteSpace += "   ";
 		}
 		System.out.println(whiteSpace+"|__null");
 	}
