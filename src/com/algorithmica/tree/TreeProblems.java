@@ -4,10 +4,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import sun.reflect.generics.tree.Tree;
+
 public class TreeProblems<T> {
 	
 	TreeNode<T> root = null;
-
+	
+	TreeNode<T> maxNode = null;
+	
 	public static void main(String[] args) {
 		TreeProblems<Integer> ts = new TreeProblems<Integer>();
 		ts.generateTree(Integer.parseInt(args[0]));
@@ -20,10 +24,13 @@ public class TreeProblems<T> {
 //		System.out.println(sizeQ);
 		
 		//depth
-		int depthR = ts.depthR(ts.root);
-		System.out.println("depth : "+depthR);
-		int depthQ = ts.depthQ();
-		System.out.println("depth : "+depthQ);
+//		int depthR = ts.depthR(ts.root);
+//		System.out.println("depth : "+depthR);
+//		int depthQ = ts.depthQ();
+//		System.out.println("depth : "+depthQ);
+		
+		TreeNode<Integer> maxR = ts.maxR(ts.root);
+		System.out.println("max value : "+maxR.data);
 	}
 	
 	public  int sizeR(TreeNode<T> root){
@@ -85,6 +92,38 @@ public class TreeProblems<T> {
 		
 	}
 	
+	public TreeNode<T> maxR(TreeNode<T> root){
+		TreeNode<T> leftMax = null;
+		TreeNode<T> rightMax = null;
+		if(root == null)
+			return root;
+		if(root.left == null && root.right == null) return root;
+		if(root.left != null) leftMax = maxR(root.left);
+		if(root.right != null) rightMax = maxR(root.right);
+		TreeNode<T> max = findMax(root,leftMax, rightMax);
+		return max;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private TreeNode<T> findMax(TreeNode<T> root,TreeNode<T> left,TreeNode<T> right){	
+		TreeNode<T> max = null;
+		if(left == null){
+			max = right;
+		}
+		else if(right == null){
+			max = left;
+		}else{
+			if(left.data instanceof Comparable) {
+				if(((Comparable)left.data).compareTo((Comparable)right.data) > 0){
+					max = ((Comparable)left.data).compareTo((Comparable)root.data) > 0 ? left : root;
+				}else{
+					max = ((Comparable)right.data).compareTo((Comparable)root.data) > 0 ? right : root;
+				}
+			}
+		}
+		return max;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void generateTree(int size){
 		Random r = new Random();
@@ -123,7 +162,7 @@ public class TreeProblems<T> {
 		printNode(root,0);
 	}
 	
-	public void printNode(TreeNode<T> node,int level){
+	private void printNode(TreeNode<T> node,int level){
 		
 		if(node == null) return;
 		String whiteSpace = "";
@@ -142,12 +181,13 @@ public class TreeProblems<T> {
 		}		
 	}
 	
-	public void printNull(int level){
+	private void printNull(int level){
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
 			whiteSpace += "   ";
 		}
 		System.out.println(whiteSpace+"|__null");
 	}
+
 	
 }
