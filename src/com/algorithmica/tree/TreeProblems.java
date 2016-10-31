@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-public class TreeProblems<T> {
+@SuppressWarnings("rawtypes")
+public class TreeProblems<T extends Comparable> {
 	
 	TreeNode<T> root = null;
 	
@@ -28,7 +29,9 @@ public class TreeProblems<T> {
 //		System.out.println("depth : "+depthQ);
 		
 		TreeNode<Integer> maxR = ts.maxR(ts.root);
-		System.out.println("max value : "+maxR.data);
+		TreeNode<Integer> maxQ = ts.maxQ();
+		System.out.println("maxR value : "+maxR.data);
+		System.out.println("maxQ value : "+maxQ.data);
 	}
 	
 	public  int sizeR(TreeNode<T> root){
@@ -102,7 +105,22 @@ public class TreeProblems<T> {
 		return max;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("unchecked")
+	public TreeNode<T> maxQ(){
+		Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
+		queue.add(root);
+		maxNode = root;
+		
+		while(!queue.isEmpty()){
+			TreeNode<T> tmp = queue.remove();
+			maxNode = tmp.data.compareTo(maxNode.data) > 0 ? tmp : maxNode;
+			if(tmp.left != null)queue.add(tmp.left);
+			if(tmp.right != null)queue.add(tmp.right);
+		}
+		return maxNode;
+	}
+	
+	@SuppressWarnings({ "unchecked" })
 	private TreeNode<T> findMax(TreeNode<T> root,TreeNode<T> left,TreeNode<T> right){	
 		TreeNode<T> max = null;
 		if(left == null){
@@ -111,13 +129,13 @@ public class TreeProblems<T> {
 		else if(right == null){
 			max = left;
 		}else{
-			if(left.data instanceof Comparable) {
+			//if(left.data instanceof Comparable) {
 				if(((Comparable)left.data).compareTo((Comparable)right.data) > 0){
 					max = ((Comparable)left.data).compareTo((Comparable)root.data) > 0 ? left : root;
 				}else{
 					max = ((Comparable)right.data).compareTo((Comparable)root.data) > 0 ? right : root;
 				}
-			}
+			//}
 		}
 		return max;
 	}
