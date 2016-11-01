@@ -11,6 +11,8 @@ public class TreeProblems<T extends Comparable> {
 	
 	TreeNode<T> maxNode = null;
 	
+	int maxPathSum = 0;
+	
 	public static void main(String[] args) {
 		TreeProblems<Integer> ts = new TreeProblems<Integer>();
 		ts.generateTree(Integer.parseInt(args[0]));
@@ -28,10 +30,19 @@ public class TreeProblems<T extends Comparable> {
 //		int depthQ = ts.depthQ();
 //		System.out.println("depth : "+depthQ);
 		
-		TreeNode<Integer> maxR = ts.maxR(ts.root);
-		TreeNode<Integer> maxQ = ts.maxQ();
-		System.out.println("maxR value : "+maxR.data);
-		System.out.println("maxQ value : "+maxQ.data);
+		//max element
+//		TreeNode<Integer> maxR = ts.maxR(ts.root);
+//		System.out.println("maxR value : "+maxR.data);
+//		TreeNode<Integer> maxQ = ts.maxQ();
+//		System.out.println("maxQ value : "+maxQ.data);
+		
+		//max path sum
+		int maxPathSum = ts.findMaxPathSumUsingAuxilaryPath(ts.root);
+		System.out.println("max path sum using aux path : "+maxPathSum);
+		maxPathSum = ts.findMaxPathSumDivAndCon(ts.root);
+		System.out.println("max path sum using div & con : "+maxPathSum);
+		
+		
 	}
 	
 	public  int sizeR(TreeNode<T> root){
@@ -140,12 +151,36 @@ public class TreeProblems<T extends Comparable> {
 		return max;
 	}
 	
+	public int findMaxPathSumUsingAuxilaryPath(TreeNode<T> root){
+		pathSum(root, 0);
+		return maxPathSum;
+	}
+	
+	private void pathSum(TreeNode<T> root,int sum){		
+		if(root == null) return;
+		sum = sum+(Integer)root.data;
+		if(root.left == null && root.right == null) maxPathSum = (Integer) Math.max(sum, maxPathSum);		
+		if(root.left != null) pathSum(root.left, sum);
+		if(root.right != null) pathSum(root.right, sum);
+	}
+	
+	public int findMaxPathSumDivAndCon(TreeNode<T> root){
+		int leftPathSize = 0;
+		int rightPathSize = 0;
+		if(root == null) return 0;
+		if(root.left == null && root.right == null) return (Integer)root.data;
+		leftPathSize = rightPathSize = (Integer)root.data;
+		if(root.left != null) leftPathSize += findMaxPathSumDivAndCon(root.left);
+		if(root.right != null) rightPathSize += findMaxPathSumDivAndCon(root.right);
+		return Math.max(leftPathSize, rightPathSize);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void generateTree(int size){
 		Random r = new Random();
 		for(int i = 0; i < size; i++){
 			TreeNode<Integer> node = new TreeNode<Integer>();
-			node.data = r.nextInt(100);
+			node.data = r.nextInt(10);
 			addNode((TreeNode<T>)node);
 		}
 	}
