@@ -32,7 +32,7 @@ public class BinaryTree<T> {
 		printNode(root,0);
 	}
 	
-	public void printNode(TreeNode<T> node,int level){
+	private void printNode(TreeNode<T> node,int level){
 		
 		if(node == null) return;
 		String whiteSpace = "";
@@ -51,7 +51,7 @@ public class BinaryTree<T> {
 		}		
 	}
 	
-	public void printNull(int level){
+	private void printNull(int level){
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
 			whiteSpace += "   ";
