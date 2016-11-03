@@ -6,7 +6,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		int n = Integer.parseInt(args[0]);
-		ISet<Integer> set = new HashSet<>();
+		ISet<Integer> set = new HashSet<Integer>();
 		Random r = new Random();
 		set.add(100);
 		for(int i = 0; i < n; i++){
