@@ -13,7 +13,10 @@ public class DriverTreeSet {
 			set.add(r.nextInt(100));
 		}	
 		
-		System.out.println(set.display());
+		set.display();
+		boolean contains = set.contains(0);
+		System.out.println("contains 0 : "+contains);
+		System.out.println(set.size());
 //		System.out.println(set.size());
 //		set.remove(100);
 //		System.out.println(set.display());

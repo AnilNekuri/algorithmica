@@ -7,11 +7,17 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 
 	BSTNode<T> root = null;
 	
+	int size = 0;
+	
 	@Override
 	public boolean add(T e) {
 		if(e != null){
 			BSTNode<T> current = new BSTNode<T>(e);
-			return add(root, current);
+			if(add(root, current)){
+				++size;
+				return true;
+			}
+			 
 		}
 		return false;
 	}
@@ -23,7 +29,7 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 			this.root = current;
 			return true;
 		}else{
-			int comp = root.data.compareTo(current.data);
+			int comp = current.data.compareTo(root.data);
 			if(comp < 0){
 				if(root.left != null){
 					status = add(root.left,current);
@@ -45,8 +51,18 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 	
 	@Override
 	public boolean contains(T e) {
-		// TODO Auto-generated method stub
-		return false;
+		return contains(root, e);
+	}
+	
+	private boolean contains(BSTNode<T> root,T e){
+		boolean contains = false;
+		if(root == null) return false;
+		if(root.data.equals(e))return true;
+		@SuppressWarnings("unchecked")
+		int comp = e.compareTo(root.data);
+		if(comp < 0)contains = contains(root.left,e);
+		else if(comp > 0)contains = contains(root.right, e);
+		return contains;
 	}
 
 	@Override
@@ -58,13 +74,22 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public String display() {
+		printInOrder(root);
+		System.out.println();
 		printNode(root,0);
 		return null;
+	}
+	
+	private void printInOrder(BSTNode<T> root){
+		if(root == null) return;
+		if(root.left != null) printInOrder(root.left);
+		System.out.print(root.data+",");
+		if(root.right != null) printInOrder(root.right);		
 	}
 
 	private void printNode(BSTNode<T> node,int level){
@@ -72,7 +97,7 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 		if(node == null) return;
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
-			whiteSpace += "   ";
+												whiteSpace += "   ";
 		}
 		System.out.println(whiteSpace+"|__"+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString()));
 		//System.out.print(whiteSpace+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString())+"-->");
