@@ -9,6 +9,8 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 	
 	int size = 0;
 	
+	boolean remove = false;
+	
 	@Override
 	public boolean add(T e) {
 		if(e != null){
@@ -67,8 +69,51 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 
 	@Override
 	public boolean remove(T e) {
-		// TODO Auto-generated method stub
+		
+		if(root != null)remove(root, e);
+		else System.out.println("Set is empty!");
 		return false;
+	}
+	
+	private boolean remove(BSTNode<T> root,T e){
+		boolean status = false;
+		boolean left = true;
+		if(root == null) return false;
+		if(root.data.equals(e))return true;
+		
+		@SuppressWarnings("unchecked")
+		int comp = e.compareTo(root.data);
+		BSTNode<T> child = null;
+		if(comp < 0){
+			child = root.left;
+			left = true;			
+		}else{
+			child = root.right;
+			left = false;
+		}
+		status = remove(child,e);
+		if(status && !remove){
+			removeNode(root,child,left);
+			--size;
+		}		
+		return status;
+	}
+	
+	private void removeNode(BSTNode<T> root,BSTNode<T> rNode,boolean left){	
+		
+		System.out.println(root.data+" - "+rNode.data+" - "+left);
+		if(rNode.right == null && rNode.left == null){
+			if(left){
+				root.left = null;
+			}else{
+				root.right = null;
+			}
+		}
+		if(rNode.right != null )
+			rNode.data = leftMostNode(rNode.right, rNode,0);
+		if(rNode.left != null )
+			rNode.data = rightMostNode(rNode.left, rNode,0);
+		remove = true;
 	}
 
 	@Override
@@ -85,6 +130,58 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 		return null;
 	}
 	
+
+	
+	@Override
+	public T findMin() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private T leftMostNode(BSTNode<T> node,BSTNode<T> parent,int c){
+		if(node.left != null) return leftMostNode(node.left,node,++c);
+		else{
+			if(node.right != null){
+				parent.left = node.right;
+			}else{
+				if(c > 0)parent.left = null;
+				else parent.right = null;
+			}
+			return node.data;
+		} 
+	}
+	
+	private T rightMostNode(BSTNode<T> node,BSTNode<T> parent,int c){
+		if(node.right != null) return rightMostNode(node.right,node,++c);
+		else{
+			if(node.left != null){
+				parent.right = node.left;
+			}else{
+				if(c > 0)parent.right = null;
+				else parent.left = null;
+			}
+			return node.data;
+		} 
+	}
+
+	@Override
+	public T findMax() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int select(int k) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public IList<T> findRange(T s, T m) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private void printInOrder(BSTNode<T> root){
 		if(root == null) return;
 		if(root.left != null) printInOrder(root.left);
@@ -97,7 +194,7 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 		if(node == null) return;
 		String whiteSpace = "";
 		for(int i = 0;i<level;i++){
-												whiteSpace += "   ";
+			whiteSpace += "   ";
 		}
 		System.out.println(whiteSpace+"|__"+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString()));
 		//System.out.print(whiteSpace+(node.data.toString().length() == 1 ? node.data.toString()+" " : node.data.toString())+"-->");
@@ -117,30 +214,6 @@ public class TreeSet<T extends Comparable> implements ISortedSet<T> {
 			whiteSpace += "   ";
 		}
 		System.out.println(whiteSpace+"|__null");
-	}
-	
-	@Override
-	public T findMin() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T findMax() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int select(int k) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public IList<T> findRange(T s, T m) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
