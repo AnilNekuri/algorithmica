@@ -1,6 +1,9 @@
 package com.algorithmica.dp;
 
 import java.util.Random;
+import java.util.Stack;
+
+import com.algorithmica.lists.LinkedList;
 
 public class MaxCoinCount {
 
@@ -16,15 +19,17 @@ public class MaxCoinCount {
 		mc.nc = Integer.parseInt(args[0]);
 		mc.grid = new int[mc.nc][mc.nc];
 		mc.fillGrid();
-		mc.displayGrid();				
-		int maxCoins = mc.maxRec();
-		System.out.println("Max coins using recursive: "+maxCoins);
-		maxCoins = mc.maxDivAndConq();
-		System.out.println("Max coins using divide and conquer: "+maxCoins);
-		maxCoins = mc.maxDivAndConqDP();
-		System.out.println("Max coins using divide and conquer and DP: "+maxCoins);
-		maxCoins = mc.maxLoopDP();
+		//mc.displayGrid();		
+		int maxCoins = mc.maxLoopDP();
 		System.out.println("Max coins using loop and DP: "+maxCoins);
+		mc.displayMaxCoinsPath();
+//		maxCoins = mc.maxRec();
+//		System.out.println("Max coins using recursive: "+maxCoins);
+//		maxCoins = mc.maxDivAndConq();
+//		System.out.println("Max coins using divide and conquer: "+maxCoins);
+//		maxCoins = mc.maxDivAndConqDP();
+//		System.out.println("Max coins using divide and conquer and DP: "+maxCoins);
+
 	}
 	
 	public void fillGrid(){
@@ -97,11 +102,37 @@ public class MaxCoinCount {
 	}
 	
 	private int maxLoopDP(){
+		gridMaxSum = new int[nc][nc];
 		for(int i = 0; i < grid.length; i++){
 			for(int j = 0; j < grid[i].length; j++){
 				gridMaxSum[i][j] = grid[i][j] + Math.max(i == 0 ? 0 : gridMaxSum[i-1][j], j == 0 ? 0 : gridMaxSum[i][j-1]);
 			}
 		}
 		return gridMaxSum[nc-1][nc-1];
+	}
+	
+	/**
+	 * Display max coins path using stack
+	 */
+	private void displayMaxCoinsPath(){
+		Stack<String> stack = new Stack<String>();
+		int i = nc-1,j = i;
+		while(true){
+			String index = "["+i+","+j+"]";
+			if(i == 0 && j == 0){
+				stack.add(index);
+				break;
+			}
+			stack.add(index);
+			if(i == 0)--j;
+			else if(j == 0)--i;
+			else{
+				if(gridMaxSum[i-1][j] > gridMaxSum[i][j-1])--i;
+				else --j;				
+			}
+		}
+		while(!stack.isEmpty()){
+			System.out.println(stack.pop());
+		}
 	}
 }
