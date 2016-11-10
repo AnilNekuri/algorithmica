@@ -127,7 +127,7 @@ public class MaxCoinCount {
 			if(i == 0)--j;
 			else if(j == 0)--i;
 			else{
-				if(gridMaxSum[i-1][j] > gridMaxSum[i][j-1])--i;
+				if(gridMaxSum[i-1][j] > gridMaxSum[i][j-1])	--i;
 				else --j;				
 			}
 		}
