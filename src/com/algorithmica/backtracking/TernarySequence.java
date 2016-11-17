@@ -1,4 +1,4 @@
-package com.algorithmica.greedy;
+package com.algorithmica.backtracking;
 
 import java.util.Arrays;
 
