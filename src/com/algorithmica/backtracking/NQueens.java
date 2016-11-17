@@ -13,12 +13,15 @@ public class NQueens {
 		int[] qs = new int[n];
 		Arrays.fill(qs, -1);
 		placeQns(qs, 0);
-		System.out.println(count);
+		System.out.println();
+		System.out.println("No of Comb: "+count);
 	}
 
 	public static void placeQns(int[] qs, int r) {
 		if (r == n) {
-			System.out.println(Arrays.toString(qs));
+			//System.out.println(Arrays.toString(qs));
+			display(qs);
+			System.out.println();
 			count++;
 			return;
 		}
@@ -37,5 +40,18 @@ public class NQueens {
 				isValid = false;
 		}
 		return isValid;
+	}
+	
+	public static void display(int[] qs){
+		for(int i = 0; i < qs.length; i++){			
+			for(int j = 0; j < qs.length; j++){
+				if(j == qs[i]){
+					System.out.print(" Q");
+				}else{
+					System.out.print(" "+j);
+				}
+			}
+			System.out.println();
+		}
 	}
 }
