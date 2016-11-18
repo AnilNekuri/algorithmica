@@ -1,17 +1,48 @@
 package com.algorithmica.backtracking;
 
+import java.util.Arrays;
+
 public class Sudoku {
 	
 	static int[][] indexOrder = new int[81][2]; 
 	
-	static int[][] sudoArr = new int[9][9];
+//	static int[][] sudoArr = {
+//								{0,2,6,0,0,9,5,7,0},
+//								{3,5,0,0,7,6,1,4,0},
+//								{0,7,1,8,0,3,9,0,0},
+//								{7,1,0,0,0,5,6,8,0},
+//								{5,0,0,6,8,0,0,1,4},
+//								{2,0,8,1,4,0,0,0,9},
+//								{6,8,2,0,9,0,0,0,7},
+//								{0,0,7,0,6,0,2,9,5},
+//								{9,0,0,7,0,4,0,0,1}
+//			
+//							};
+	
+	static int[][] sudoArr = {
+			{0,0,0,0,0,3,0,0,0},
+			{0,0,0,0,0,0,7,0,1},
+			{1,0,0,0,8,0,5,4,0},
+			{0,5,6,0,1,9,0,0,4},
+			{9,0,0,0,0,0,0,0,8},
+			{3,0,0,6,5,0,1,7,0},
+			{0,1,8,0,4,0,0,0,7},
+			{7,0,3,0,0,0,0,0,0},
+			{0,0,0,9,0,0,0,0,0}
+
+		};
 	
 	public static void main(String[] args) {
 		sudo();		
 	}
+
 	
 	public static void sudo(){
 		createOrder();
+//		for (int i = 0; i < indexOrder.length; i++) {
+//			System.out.println(i+"- "+Arrays.toString(indexOrder[i]));
+//		}
+		
 		fillSudo(0);
 	}
 	
@@ -21,11 +52,16 @@ public class Sudoku {
 			System.out.println();
 			return;
 		}
-		for(int n = 1; n <= 9; n++){	
-			if(isValid2(i, indexOrder[i][0], indexOrder[i][1], n)){
-				sudoArr[indexOrder[i][0]][indexOrder[i][1]] = n;
-				fillSudo(i+1);
-			}			
+		if(sudoArr[indexOrder[i][0]][indexOrder[i][1]] != 0){
+			fillSudo(i+1);
+		}else{
+			for(int n = 1; n <= 9; n++){	
+				if(isValid2(i, indexOrder[i][0], indexOrder[i][1], n)){
+					sudoArr[indexOrder[i][0]][indexOrder[i][1]] = n;
+					fillSudo(i+1);
+				}			
+			}
+			sudoArr[indexOrder[i][0]][indexOrder[i][1]] = 0;
 		}
 	}
 	
