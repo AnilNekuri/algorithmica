@@ -111,7 +111,7 @@ public class Sudoku {
 
 	private static boolean isNotExistInColumn(int k,int i, int j) {
 		boolean isValid = true;
-		for(int e = 0; e < i; e++){
+		for(int e = 0; e < 9; e++){
 			if(sudoArr[e][j] == k){
 				isValid = false;
 				break;
@@ -122,7 +122,7 @@ public class Sudoku {
 
 	private static boolean isNotExistInRow(int k, int i,int j) {
 		boolean isValid = true;
-		for(int e = 0; e < j; e++){
+		for(int e = 0; e < 9; e++){
 			if(sudoArr[i][e] == k){
 				isValid = false;
 				break;
