@@ -1,7 +1,5 @@
 package com.algorithmica.backtracking;
 
-import java.util.Arrays;
-
 public class Sudoku {
 	
 	static int[][] indexOrder = new int[81][2]; 

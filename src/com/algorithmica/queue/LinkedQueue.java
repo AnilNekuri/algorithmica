@@ -16,7 +16,7 @@ public class LinkedQueue<T> implements IQueue<T>{
 
 	@Override
 	public T remove() {
-		T e;
+		T e = null;
 		if(list.size() > 0)e = list.remove(0);
 		return e;
 	}

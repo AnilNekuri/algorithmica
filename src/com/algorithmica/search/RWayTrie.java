@@ -8,7 +8,9 @@ public class RWayTrie implements ITrie{
 	
 	public static void main(String[] args) {
 		ITrie iTrie = new RWayTrie();
-		iTrie.add("AZ");
+		iTrie.add("Anil");
+		boolean contains = iTrie.contains("anil");
+		System.out.println(contains);
 	}
 	
 	public RWayTrie(){
@@ -18,22 +20,36 @@ public class RWayTrie implements ITrie{
 	@Override
 	public void add(String word) {
 		if(word.length() > 0){
-			auxAdd(word.toLowerCase());	
+			auxAdd(null,word.toLowerCase());	
 		}
+		
+//		for(int i = 0; i < word.length(); i++){
+//			char c = word.charAt(i);				
+//			int ic = (int)c;
+//			if(ic == 0){
+//				this.root = 
+//			}
+//			word.charAt(i);
+//		}
 	}
 
-	public void auxAdd(String word) {
+	public void auxAdd(RWayNode root,String word) {
+		RWayChar rwChar = null;
 		if(word.length() > 0){
-			char c = word.charAt(0);	
+			char c = word.charAt(0);				
 			int i = (int)c;
-			if(i >= 97 && i < 122){
-				
-			}
-			System.out.println((int)c);
-			
+			if(i >= 97 && i <= 122){
+				if(root == null) root = this.root;
+				rwChar = new RWayChar();
+				rwChar.exist = true;				
+				root.rwChars[i%97] = rwChar;
+			}			
 		}
 		if(word.length() > 1){
-			auxAdd(word.substring(1));
+			rwChar.rwNode = new RWayNode();
+			auxAdd(rwChar.rwNode,word.substring(1));
+		}else{
+			rwChar.isWord = true;
 		}		
 	}
 
@@ -44,8 +60,31 @@ public class RWayTrie implements ITrie{
 	}
 
 	@Override
-	public boolean contains(String word) {
-		// TODO Auto-generated method stub
+	public boolean contains(String word) {		
+		return auxContains(null, word);
+	}
+	
+	public boolean auxContains(RWayNode root,String word) {
+		if(word.length() > 0){
+			if(root == null) root = this.root;
+			RWayChar rwChar = null;
+			char c = word.charAt(0);				
+			int i = (int)c;
+			if(i >= 97 && i <= 122){						
+				rwChar = root.rwChars[i%97];							
+				if(rwChar!= null && rwChar.exist){
+					if(word.length() > 1)
+						return auxContains(rwChar.rwNode, word.substring(1));
+				}else{
+						return false;
+				}
+				if(rwChar.isWord){
+					return true;
+				}else{
+					return false;
+				}
+			}			
+		}
 		return false;
 	}
 
