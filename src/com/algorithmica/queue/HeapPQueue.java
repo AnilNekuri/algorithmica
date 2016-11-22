@@ -38,19 +38,31 @@ public class HeapPQueue<T extends Comparable<T>> implements IPQueue<T>{
 	@Override
 	public T findMax() {
 		// TODO Auto-generated method stub
-		return null;
+		return heap.get(0);
 	}
 
 	@Override
 	public T removeMax() {
-		// TODO Auto-generated method stub
-		return null;
+		T tmp = heap.remove(heap.size()-1);
+		T max = heap.get(0);
+		heap.set(0,tmp);
+		int pi = 0;
+		int ci = 0;
+		while(pi < heap.size()-1){
+			ci = 2*pi + 1;
+			if(ci < heap.size() && heap.get(pi).compareTo(heap.get(ci)) < 0){
+				swap(ci, pi);
+				pi = ci;
+			}else
+				break;
+		}
+		return max;
 	}
 
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return heap.size();
 	}
 
 	@Override

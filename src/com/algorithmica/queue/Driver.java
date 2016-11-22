@@ -13,6 +13,12 @@ public class Driver {
 			pQueue.add(r);
 		}
 		pQueue.display();
+		Integer max = pQueue.removeMax();
+		System.out.println(max);
+		pQueue.display();
+		max = pQueue.removeMax();
+		System.out.println(max);
+		pQueue.display();
 	}
 	
 	public static int getRandom(int min,int max){
