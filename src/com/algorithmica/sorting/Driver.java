@@ -11,9 +11,10 @@ public class Driver {
 		int n = Integer.parseInt(args[0]);
 		int[] inArr = new int[n];
 		for(int i = 0; i < n; i++){
-			inArr[i] = getRandom(0, n);
+			inArr[i] = getRandom(0, 100);
 		}
-		Sorting.insertionSort(inArr);
+		System.out.println(Arrays.toString(inArr));
+		Sorting.mergeSort(inArr);
 		System.out.println(Arrays.toString(inArr));
 	}
 	

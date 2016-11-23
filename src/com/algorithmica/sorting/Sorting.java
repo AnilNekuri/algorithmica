@@ -32,10 +32,53 @@ public class Sorting {
 	}
 	
 	public static void mergeSort(int[] inArr){
-		
+		int li = 0;
+		int ui = inArr.length-1;
+		auxMergeSort(inArr, li, ui);
 	}
 	
-	//public static void auxMergeSort(int[] ){
+	private static void auxMergeSort(int[] inArr,int li,int ui){
+		if(li == ui)
+			return;
+		int ui1 = li + (ui-li)/2;
+		int li2 = ui1+1;
+
+		auxMergeSort(inArr, li, ui1);
+		auxMergeSort(inArr, li2, ui);
+		merge(inArr, li, ui1, li2, ui);
+	}
+	
+	private static void merge(int[] inArr,int li1,int ui1,int li2,int ui2){
+		int[] tmp =new int[ui2-li1+1];
+		int i = li1;
+		int j = li2;
+		int k = 0;
+		while(i <= ui1 && j <= ui2){
+			int a1 = inArr[i];
+			int a2 = inArr[j];
+			if(a1 > a2){
+				tmp[k++] = a2;
+				j++;		
+			}		
+			else {
+				tmp[k++] = a1;
+				i++;
+			}	
+			
+		}
+		if(i <= ui1)
+			while(k < tmp.length && i <= ui1){
+				tmp[k++] = inArr[i++];
+				
+			}
 		
+		if(j <= ui2)
+			while(k < tmp.length && i <= ui2){
+				tmp[k++] = inArr[j++];
+			}
+		
+		for(k = 0; k < tmp.length; k++){
+			inArr[k+li1] = tmp[k];
+		}
 	}
 }
