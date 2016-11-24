@@ -125,9 +125,7 @@ public class Sorting {
 				lastMin++;
 				if(inArr[lastMin] > pivot)
 					swap(inArr, lastMin, i);
-			}				
-			
-			
+			}										
 		}
 		swap(inArr, pivotIndex, lastMin);
 		return lastMin;
