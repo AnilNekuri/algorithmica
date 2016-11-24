@@ -15,7 +15,7 @@ public class Driver {
 		}
 		
 		System.out.println(Arrays.toString(inArr));
-		Sorting.heapSort(inArr);
+		Sorting.quickSort(inArr);
 		System.out.println(Arrays.toString(inArr));
 	}
 	

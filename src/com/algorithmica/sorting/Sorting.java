@@ -99,12 +99,19 @@ public class Sorting {
 	}
 
 	private static void auxQuickSort(int[] inArr, int l, int u) {
-		if(l == u)
+		if(l >= u)
 			return;
 		int p = partion(inArr,l,u);
 		auxQuickSort(inArr, l, p-1);
 		auxQuickSort(inArr, p+1, u);
 		
+	}
+	
+	private static void swap(final int[] arr,int ci, int pi) {
+		if(ci == pi) return;
+		int tmp = arr[ci];
+		arr[ci] = arr[pi];
+		arr[pi] = tmp;
 	}
 	//pivot index as startin element
 	//pivot index as random element
@@ -113,12 +120,17 @@ public class Sorting {
 		int pivotIndex = l;
 		int pivot = inArr[pivotIndex];
 		int lastMin = pivotIndex;
-		for(int i = l; i < u; i++){
-			if(pivot > inArr[i])
+		for(int i = l; i <= u; i++){
+			if(pivot > inArr[i]){
 				lastMin++;
+				if(inArr[lastMin] > pivot)
+					swap(inArr, lastMin, i);
+			}				
+			
 			
 		}
-		return 0;
+		swap(inArr, pivotIndex, lastMin);
+		return lastMin;
 	}
 	
 	//HybridSort
