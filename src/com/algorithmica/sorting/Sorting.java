@@ -1,5 +1,6 @@
 package com.algorithmica.sorting;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.TreeSet;
@@ -135,7 +136,7 @@ public class Sorting {
 	//pivot index as random element
 	//pivot index as meadian of three
 	private static int partion(int[] inArr, int l, int u) {
-		int pivotIndex = l;
+		int pivotIndex = medianOf3(l, u);
 		int pivot = inArr[pivotIndex];
 		int lastMin = -1;
 		for(int i = l; i <= u; i++){
@@ -143,7 +144,6 @@ public class Sorting {
 					if(lastMin != -1)lastMin++;
 					else lastMin = l;		
 					if(lastMin == pivotIndex) lastMin++;
-				if(inArr[lastMin] > pivot)
 					swap(inArr, lastMin, i);
 			}										
 		}
@@ -151,7 +151,13 @@ public class Sorting {
 			if(lastMin != -1)lastMin++;
 			else lastMin = l;		
 		}
+//		System.out.println("l : "+l+" , u : "+u);
+//		System.out.println("p : "+pivotIndex+" , value : "+pivot);
+//		System.out.println("m : "+lastMin+" , value : "+inArr[lastMin]);
+//		System.out.println("Bfr : "+Arrays.toString(Arrays.copyOfRange(inArr, l, u)));
 		swap(inArr, pivotIndex, lastMin);
+//		System.out.println("Aft : "+Arrays.toString(Arrays.copyOfRange(inArr, l, u)));
+//		System.out.println();
 		return lastMin;
 	}
 	
