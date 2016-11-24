@@ -13,8 +13,9 @@ public class Driver {
 		for(int i = 0; i < n; i++){
 			inArr[i] = getRandom(0, 100);
 		}
+		
 		System.out.println(Arrays.toString(inArr));
-		Sorting.mergeSort(inArr);
+		Sorting.heapSort(inArr);
 		System.out.println(Arrays.toString(inArr));
 	}
 	

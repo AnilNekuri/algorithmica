@@ -1,21 +1,33 @@
 package com.algorithmica.sorting;
 
-import java.util.Set;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 public class Sorting {
 
-	public static void treeSort(int[] arr){
-		Set<Integer> ts = new TreeSet<Integer>();
+	public static void treeSort(final int[] arr){
+		TreeSet<Integer> ts = new TreeSet<Integer>();
 		for(int i = 0; i < arr.length; i++){
 			ts.add(arr[i]);
+		}
+		for(int i = 0; i < arr.length; i++){
+			arr[i] = ts.pollFirst();
 		}
 	}
 	
 	//heap sort
+	public static void heapSort(int[] inArr){
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+		for(int i = 0; i < inArr.length; i++){
+			pq.add(inArr[i]);
+		}
+		for(int i = 0; i < inArr.length; i++){
+			inArr[i] = pq.poll();
+		}
+	}
 	
 	//inertion sort
-	public static void insertionSort(int[] inArr){
+	public static void insertionSort(final int[] inArr){
 		if(inArr.length > 1){
 			for(int i = 1; i < inArr.length; i++){
 				int current = inArr[i];
@@ -31,7 +43,7 @@ public class Sorting {
 		}		
 	}
 	
-	public static void mergeSort(int[] inArr){
+	public static void mergeSort(final int[] inArr){
 		int li = 0;
 		int ui = inArr.length-1;
 		auxMergeSort(inArr, li, ui);
