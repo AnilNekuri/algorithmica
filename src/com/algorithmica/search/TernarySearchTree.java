@@ -4,10 +4,19 @@ import java.util.Queue;
 
 public class TernarySearchTree implements ITrie {
 
+	private TNode root;
+	
 	@Override
 	public void add(String word) {
-		// TODO Auto-generated method stub
-
+		if(root==null) root = new TNode();
+		if(word.length() > 0)auxAdd(root, word);
+	}
+	
+	private void auxAdd(TNode node,String word){
+		if(node.c == 0)	node.c = word.charAt(0);
+		else{
+			
+		}
 	}
 
 	@Override

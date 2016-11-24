@@ -93,4 +93,38 @@ public class Sorting {
 			inArr[k+li1] = tmp[k];
 		}
 	}
+	
+	public static void quickSort(int[] inArr){
+		auxQuickSort(inArr,0,inArr.length-1);
+	}
+
+	private static void auxQuickSort(int[] inArr, int l, int u) {
+		if(l == u)
+			return;
+		int p = partion(inArr,l,u);
+		auxQuickSort(inArr, l, p-1);
+		auxQuickSort(inArr, p+1, u);
+		
+	}
+	//pivot index as startin element
+	//pivot index as random element
+	//pivot index as meadian of three
+	private static int partion(int[] inArr, int l, int u) {
+		int pivotIndex = l;
+		int pivot = inArr[pivotIndex];
+		int lastMin = pivotIndex;
+		for(int i = l; i < u; i++){
+			if(pivot > inArr[i])
+				lastMin++;
+			
+		}
+		return 0;
+	}
+	
+	//HybridSort
+	private static void HybridSort(int[] inArr){
+		//mix multiple sorts
+		//combination of sorting techniques
+	}
+	
 }
