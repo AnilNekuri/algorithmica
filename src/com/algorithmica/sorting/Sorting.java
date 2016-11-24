@@ -1,10 +1,13 @@
 package com.algorithmica.sorting;
 
 import java.util.PriorityQueue;
+import java.util.Random;
 import java.util.TreeSet;
 
 public class Sorting {
 
+	static Random r = new Random();
+	
 	public static void treeSort(final int[] arr){
 		TreeSet<Integer> ts = new TreeSet<Integer>();
 		for(int i = 0; i < arr.length; i++){
@@ -103,8 +106,7 @@ public class Sorting {
 			return;
 		int p = partion(inArr,l,u);
 		auxQuickSort(inArr, l, p-1);
-		auxQuickSort(inArr, p+1, u);
-		
+		auxQuickSort(inArr, p+1, u);		
 	}
 	
 	private static void swap(final int[] arr,int ci, int pi) {
@@ -113,24 +115,58 @@ public class Sorting {
 		arr[ci] = arr[pi];
 		arr[pi] = tmp;
 	}
+	
+	private static int partion1(int[] inArr, int l, int u) {
+		int pivotIndex = l;
+		int pivot = inArr[pivotIndex];
+		int lastMin = l;
+		for(int i = l; i <= u; i++){
+			if(pivot > inArr[i]){
+					lastMin++;					
+				if(inArr[lastMin] > pivot)
+					swap(inArr, lastMin, i);
+			}										
+		}		
+		swap(inArr, pivotIndex, lastMin);
+		return lastMin;
+	}
+	
 	//pivot index as startin element
 	//pivot index as random element
 	//pivot index as meadian of three
 	private static int partion(int[] inArr, int l, int u) {
 		int pivotIndex = l;
 		int pivot = inArr[pivotIndex];
-		int lastMin = pivotIndex;
+		int lastMin = -1;
 		for(int i = l; i <= u; i++){
 			if(pivot > inArr[i]){
-				lastMin++;
+					if(lastMin != -1)lastMin++;
+					else lastMin = l;		
+					if(lastMin == pivotIndex) lastMin++;
 				if(inArr[lastMin] > pivot)
 					swap(inArr, lastMin, i);
 			}										
+		}
+		if(lastMin < pivotIndex){
+			if(lastMin != -1)lastMin++;
+			else lastMin = l;		
 		}
 		swap(inArr, pivotIndex, lastMin);
 		return lastMin;
 	}
 	
+	private static int medianOf3(int l, int u) {
+		int median = 0;
+		int rint = r.nextInt(3);
+		int m = (u - l)/2 + l;
+		switch(rint){
+			case 0: median =  (m - l)/2 + l;break;
+			case 1: median =  (u - m)/2 + m;break;
+			case 2: median =  (u - l)/2 + l;break;
+		}
+		return median;
+	}
+
 	//HybridSort
 	private static void HybridSort(int[] inArr){
 		//mix multiple sorts

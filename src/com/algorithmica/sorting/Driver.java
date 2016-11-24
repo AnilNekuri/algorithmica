@@ -14,7 +14,7 @@ public class Driver {
 			inArr[i] = getRandom(0, 100);
 		}
 		
-		System.out.println(Arrays.toString(inArr));
+		//System.out.println(Arrays.toString(inArr));
 		Sorting.quickSort(inArr);
 		System.out.println(Arrays.toString(inArr));
 	}
