@@ -1,6 +1,5 @@
 package com.algorithmica.sorting;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.TreeSet;
