@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class NLineFronReverse {
 
+	static String fileLoc = "E:/workspace/bible/bible.txt";
+	
 	public static void main(String[] args) throws IOException {
 		long st = 0;
 		long et = 0;
@@ -28,7 +30,7 @@ public class NLineFronReverse {
 	
 	public static void sol1(int n) throws IOException{
 		
-		BufferedReader br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		BufferedReader br = new BufferedReader(new FileReader(new File(fileLoc)));
 		int tLine = 0;
 		String line = null;
 		while((line = br.readLine()) != null){
@@ -36,7 +38,7 @@ public class NLineFronReverse {
 		}
 		br.close();
 		
-		br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		br = new BufferedReader(new FileReader(new File(fileLoc)));
 		int i = 0;
 		int nLine = tLine - (n);
 		while((line = br.readLine()) != null){
@@ -49,7 +51,7 @@ public class NLineFronReverse {
 	}
 	
 	public static void sol2(int n) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		BufferedReader br = new BufferedReader(new FileReader(new File(fileLoc)));
 		ArrayList<Integer> index = new ArrayList<Integer>();
 		int ic = 0;
 		int nchars = 0;
@@ -62,7 +64,7 @@ public class NLineFronReverse {
 		br.close();
 		int nLines = index.size();
 		//System.out.println(index);
-		br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		br = new BufferedReader(new FileReader(new File(fileLoc)));
 		br.skip(index.get(nLines - n));
 		String line = null;
 		if((line = br.readLine()) != null){
@@ -72,7 +74,7 @@ public class NLineFronReverse {
 	}
 	
 	public static void sol3(int n) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		BufferedReader br = new BufferedReader(new FileReader(new File(fileLoc)));
 		ArrayList<Integer> index = new ArrayList<Integer>();
 		String line = null; 
 		int nchars = 0;
@@ -83,7 +85,7 @@ public class NLineFronReverse {
 		br.close();
 		int nLines = index.size();
 		//System.out.println(index);
-		br = new BufferedReader(new FileReader(new File("E:/workspace/bible/bible.txt")));
+		br = new BufferedReader(new FileReader(new File(fileLoc)));
 		br.skip(index.get(nLines - (n+1)));
 		line = null;
 		if((line = br.readLine()) != null){
