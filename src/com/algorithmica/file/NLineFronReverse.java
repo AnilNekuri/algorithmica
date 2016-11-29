@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+
+import org.apache.commons.io.input.ReversedLinesFileReader;
 
 public class NLineFronReverse {
 
@@ -92,5 +95,10 @@ public class NLineFronReverse {
 			System.out.println(line);
 		}
 		br.close();
+	}
+	
+	public static void reverseFileReaderSol() throws IOException{
+		ReversedLinesFileReader rfr = new ReversedLinesFileReader(new File(fileLoc), 4096,
+		        Charset.forName("UTF-8"));
 	}
 }
