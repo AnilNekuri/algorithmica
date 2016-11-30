@@ -13,9 +13,11 @@ public class TernarySearchTree implements ITrie {
 	}
 	
 	private void auxAdd(TNode node,String word){
+		char wc = word.charAt(0);
+		char c = node.c;
 		if(node.c == 0)	node.c = word.charAt(0);
-		else{
-			
+		else if(wc < c){
+			//node
 		}
 	}
 

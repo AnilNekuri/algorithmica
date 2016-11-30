@@ -11,24 +11,28 @@ import org.apache.commons.io.input.ReversedLinesFileReader;
 
 public class NLineFronReverse {
 
-	static String fileLoc = "E:/workspace/bible/bible.txt";
+	static String fileLoc = "E:/bible/bible.txt";
 	
 	public static void main(String[] args) throws IOException {
 		long st = 0;
 		long et = 0;
 		int n = Integer.parseInt(args[0]);
+//		st = System.currentTimeMillis();
+//		sol1(n);
+//		et = System.currentTimeMillis();
+//		System.out.println("sol1 :" +(et-st)/100.0);
+//		st = System.currentTimeMillis();
+//		sol2(n);
+//		et = System.currentTimeMillis();
+//		System.out.println("sol2 :" +(et-st)/100.0);
+//		st = System.currentTimeMillis();
+//		sol3(n);
+//		et = System.currentTimeMillis();
+//		System.out.println("sol3 :" +(et-st)/100.0);
 		st = System.currentTimeMillis();
-		sol1(n);
+		reverseFileReaderSol(n);
 		et = System.currentTimeMillis();
-		System.out.println("sol1 :" +(et-st)/100.0);
-		st = System.currentTimeMillis();
-		sol2(n);
-		et = System.currentTimeMillis();
-		System.out.println("sol2 :" +(et-st)/100.0);
-		st = System.currentTimeMillis();
-		sol3(n);
-		et = System.currentTimeMillis();
-		System.out.println("sol3 :" +(et-st)/100.0);
+		System.out.println("sol4 :" +(et-st)/100.0);
 	}
 	
 	public static void sol1(int n) throws IOException{
@@ -97,8 +101,15 @@ public class NLineFronReverse {
 		br.close();
 	}
 	
-	public static void reverseFileReaderSol() throws IOException{
+	public static void reverseFileReaderSol(int n) throws IOException{
 		ReversedLinesFileReader rfr = new ReversedLinesFileReader(new File(fileLoc), 4096,
 		        Charset.forName("UTF-8"));
+		String line = null;
+		int count = 0;
+				while((line = rfr.readLine()) != null){
+					if(++count == n)
+						System.out.println(line);
+				}
+		rfr.close();
 	}
 }
